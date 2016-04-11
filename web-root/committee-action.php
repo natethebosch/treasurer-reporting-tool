@@ -1,0 +1,23 @@
+<?php
+/**
+ * @Author: Nate Bosscher (c) 2015
+ * @Date:   2016-04-11 11:49:15
+ * @Last Modified by:   Nate Bosscher
+ * @Last Modified time: 2016-04-11 17:33:45
+ */
+
+require_once __DIR__ . "/pt.header.php";
+
+$action = ($intent->type == MailLinkType::COMM_CONFIRM ? "confirm" : "deny");
+
+?>
+
+<form method="POST">
+	<input type="hidden" name="confirmed" value="1" />
+	Are you sure you would like to <?php echo $action; ?> this receipt?
+	<input type="submit" value="Ok" />
+</form>
+
+<?php 
+
+require_once __DIR__ . "/pt.footer.php";

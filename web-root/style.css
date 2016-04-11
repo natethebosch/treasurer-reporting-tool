@@ -1,0 +1,102 @@
+/*
+* @Author: Nate Bosscher (c) 2015
+* @Date:   2016-04-11 11:22:10
+* @Last Modified by:   Nate Bosscher
+* @Last Modified time: 2016-04-11 15:21:39
+*/
+
+#form{
+	display:none;
+}
+
+.list-item{
+	width: 500px;
+}
+
+.list-item > *{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.description{
+	width: 300px;
+	overflow: hidden;
+}
+
+.amount{
+	width: 100px;
+}
+
+#list-template{
+	display:none;
+}
+
+#item-form{
+	display:none;
+}
+
+#item-form ul{
+	list-style: none;
+	padding: 20px;
+}
+
+#item-form li{
+	padding-top:10px;
+	padding-bottom: 5px;
+}
+
+label{
+	display:block;
+	font-weight: bold;
+	font-size: 13px;
+	padding-bottom:5px;
+}
+
+#item-form ul input, #item-form ul textarea{
+	margin:0;
+	margin-left: 10px;
+}
+
+textarea, input[type='text'], input[type='number']{
+	border: 1px solid hsl(0,0%,70%);
+	padding: 5px;
+}
+
+#item-form ul textarea{
+	width: 200px;
+	height: 30px;
+	resize:none;
+}
+
+#item-receipt{
+	display:none;
+}
+
+#receipt-photos{
+	list-style:none;
+	width: 300px;
+}
+
+#receipt-photos li{
+	padding: 5px;
+	background-color: #A4BAD6;
+}
+
+#receipt-photos li > *{
+	display:inline-block;
+	vertical-align: top;
+}
+
+#receipt-photos li > input{
+	float:right;
+}
+
+.validation-error{
+	display:none;
+	padding: 10px;
+	margin: 10px;
+	border-radius: 5px;
+	background-color:#FD9093;
+	border:1px solid #C96369;
+	/*color: white;*/
+}
