@@ -16,3 +16,8 @@ Setup:
 
 * Only allow access to /web-root
 * All requests for files that don't exist should be redirected to web-root/index.php
+
+Notes: 
+---------
+
+See design.mdj to see uml diagrams of design. [Star UML](http://staruml.io)
