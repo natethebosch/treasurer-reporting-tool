@@ -1,0 +1,12 @@
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_URI} ^/unsubscribe
+RewriteRule .* /web-root/index.php?action=unsubscribe [L]
+
+RewriteCond %{REQUEST_URI} ^/mail-link
+RewriteRule .* /web-root/index.php [L]
+
+
+RewriteCond %{REQUEST_URI} !^/web-root/
+RewriteRule ^(.*)$ /web-root/$1
