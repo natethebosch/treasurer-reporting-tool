@@ -8,7 +8,7 @@ Follow the instructions in [setup](#setup).
 
 System Properties:
 ------------------
-* A receipt containts the following properties:
+* A receipt My Account the following properties:
 	* Submitter
 	* Date of purchase
 	* Item description
@@ -20,7 +20,7 @@ System Properties:
 	* Photos of receipt
 
 * Anyone can submit a receipt.
-* Mulitple receipts can be sumitted at once.
+* Multiple receipts can be submitted at once.
 
 #####Flow:
 * Receipt is uploaded.
@@ -30,12 +30,12 @@ System Properties:
 #####Email Contents:
 
 * Committee members and treasurer emails contain most of the receipt properties (as above).
-* Committee members recieve separate authenticated links to "confirm" or "deny" a receipt.
+* Committee members receive separate authenticated links to "confirm" or "deny" a receipt.
 * "Confirmation" and "Denial" links require the user to confirm their selection after the link is pressed.
-* Treasurer receives notification of confirmation or denial and an authenticated link to download all receipts for a year of his/her choosing.
+* Treasurer receives notification of confirmation or denial and an authenticated link to download all receipts for a year of his / her choosing.
 
 #####Treasurer Properties:
-* A treasurer can download all receipts for the year in the folling format:
+* A treasurer can download all receipts for the year in the following format:
 	* Year
 		* Month - Day
 			* Submitter
@@ -43,7 +43,7 @@ System Properties:
 				* CSV spreadsheet form with details filled out for each receipt photo.
 
 * A treasurer's account is kept secure by rotating the authentication link every 4 months.
-* A treasure can have the authentication link emailed to his/her-self when the authentication failed message is seen.
+* A treasure can have the authentication link emailed to his / her-self when the authentication failed message is seen.
 
 #####Misc:
 * Web pages are mobile friendly.
@@ -53,7 +53,7 @@ Setup:
 --------
 
 * Install database schema (see src/db-schema/install.sql). You may manually change the database name from the default 'treasurer-tool'
-* Edit config.php with the appropriate smtp email information, url root, encryption and database information.
+* Edit config.php with the appropriate SMTP email information, URL root, encryption and database information.
 * Update data/info.json with appropriate contact email addresses.
 
 ### Apache
