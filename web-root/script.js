@@ -2,7 +2,7 @@
 * @Author: Nate Bosscher (c) 2015
 * @Date:   2016-04-11 12:51:15
 * @Last Modified by:   Nate Bosscher
-* @Last Modified time: 2016-04-11 17:17:05
+* @Last Modified time: 2016-04-12 13:16:11
 */
 
 
@@ -11,6 +11,7 @@ $(document).ready(function(){
 	var list = [];
 	var _photos = [];
 	var photosRead = 0;
+	var uploadTotalLength;
 
 	$("#item-purchase-date").datepicker({});
 
@@ -43,7 +44,7 @@ $(document).ready(function(){
 			$(".amount", tmpl).html(list[i].amount);
 			$("input", tmpl).click(removeListItem);
 
-			$("#list").append(tmpl);
+			$("#form-list").append(tmpl);
 		}
 	}
 
@@ -90,6 +91,11 @@ $(document).ready(function(){
 	}
 
 	function addPhotoFile(file){
+		if(file.size > 1000000){ // 1 mb
+			alert("Please use photos smaller than 1Mb");
+			return;
+		}
+
 		var reader = new FileReader();
 
 		reader.addEventListener("load", function(){
@@ -161,23 +167,9 @@ $(document).ready(function(){
 		$("#item-form").css("display", "none");
 	});
 
-	$("#submit-receipt").click(function(){
-		if(list.length == 0){
-			$("#items-missing").css("display", "block");
-			return;
-		}else{
-			$("#items-missing").css("display", "none");
-		}
-
-		if($("#submission-submitter").val() == ""){
-			$("#sumitter-missing").css("display", "block");
-			return;
-		}else{
-			$("#sumitter-missing").css("display", "none");
-		}
-
+	function submitItem(){
 		var data = new FormData();
-		var el = list[0];
+		var el = list.pop();
 
 		data.append("submitter", $("#submission-submitter").val());
 		data.append("dateOfPurchase", el.dateOfPurchase);
@@ -206,10 +198,58 @@ $(document).ready(function(){
 			contentType: false,
 			data: data
 		}).success(function(data){
-			debugger;
+			$("#submit-processing p").html("Progress: " + Math.round(list.length / uploadTotalLength * 100) + "%");
+
+			if(data == "1"){
+				if(list.length > 0){
+					submitItem();
+				}else{
+					showSubmitSuccess();
+				}
+			}else{
+				showSubmitError();
+			}
 		}).error(function(data){
-			debugger;
+			showSubmitError();
 		});
+	}
+
+	function showSubmitSuccess(){
+		$("#submit-processing").css("display", "none");
+		$("#form").css("display", "none");
+		$("#submit-success").css("display", "block");
+	}
+
+	function showSubmitError(){
+		$("#form").css("display", "none");
+		$("#submit-processing").css("display", "none");
+		$("#submit-error").css("display", "block");
+
+		var lst = [];
+		for(var i = 0; i < list.length; i++)
+			lst.push(list[i].description);
+
+		$("#submit-error-msg").html("There was an error and the following items were not submitted.<br>" + lst.join(",<br>"));
+	}
+
+	$("#submit-receipt").click(function(){
+		if(list.length == 0){
+			$("#items-missing").css("display", "block");
+			return;
+		}else{
+			$("#items-missing").css("display", "none");
+		}
+
+		if($("#submission-submitter").val() == ""){
+			$("#sumitter-missing").css("display", "block");
+			return;
+		}else{
+			$("#sumitter-missing").css("display", "none");
+		}
+
+		uploadTotalLength = list.length;
+		$("#submit-processing").css("display", "block");
+		submitItem();
 	});
 
 	renderList();

@@ -3,23 +3,20 @@
  * @Author: Nate Bosscher (c) 2015
  * @Date:   2016-04-11 12:46:00
  * @Last Modified by:   Nate Bosscher
- * @Last Modified time: 2016-04-11 17:30:20
+ * @Last Modified time: 2016-04-12 13:22:49
  */
 
 require_once __DIR__ . "/pt.header.php";
 ?>
 
-<h1>
-	Treasurer Reporting Tool
-</h1>
 <div id="start">
 	<input type="button" value="Submit a Receipt" />
 </div>
 <div id="form">
-	<div>
+	<div id="form-header">
 		<input type="button" value="Add Item" id="add-submission" />
 	</div>
-	<div id="list">
+	<div id="form-list">
 		<div id="list-no-items">Add an item to get started</div>
 		<div id="list-template" class="list-item">
 			<div class="description">Desciption</div>
@@ -28,7 +25,7 @@ require_once __DIR__ . "/pt.header.php";
 		</div>
 	</div>
 
-	<div>
+	<div id="form-personal-info">
 		<label>Your Name</label>
 		<input type="text" id="submission-submitter" />
 
@@ -41,7 +38,7 @@ require_once __DIR__ . "/pt.header.php";
 		<input type="button" value="Submit" id="submit-receipt" />
 	</div>
 </div>
-<div id="item-form">
+<div id="item-form" class="msg-box">
 	<h2>Add Item</h2>
 	<ul>
 		<li>
@@ -86,7 +83,7 @@ require_once __DIR__ . "/pt.header.php";
 		<li>
 			<label>Receipt</label>
 			<ul id="receipt-photos"></ul>
-			<input type="button" value="Add Image or PDF" id="add-upload-item" />
+			<input type="button" value="Add Image" id="add-upload-item" />
 			<input type="file" multiple accept="image/*" id="item-receipt" />
 		</li>
 	</ul>
@@ -96,8 +93,24 @@ require_once __DIR__ . "/pt.header.php";
 	<input type="button" value="Add" id="add-form-item" />
 	<input type="button" value="Cancel" id="cancel-add-form-item" />
 </div>
+<div id="submit-processing" class="msg-box">
+	<h2>Uploading your information</h2>
+	<p>Progress: 0%</p>
+</div>
+<div id="submit-success" class="msg-box">
+	<h2>Your information has been submitted.</h2>
+	<p>
+		You can close this window.
+	</p>
+</div>
 
-<script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+<div id="submit-error" class="msg-box">
+	<h2>Error</h2>
+	<p id="submit-error-msg"></p>
+	<p>Please contact your administrator or refresh the page and try again</p>
+</div>
+
+<script src="./jquery-2.2.3.min.js"></script>
 <script src="./jquery-ui.min.js"></script>
 <script type="text/javascript" src="./script.js"></script>
 

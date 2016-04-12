@@ -3,7 +3,7 @@
  * @Author: Nate Bosscher (c) 2015
  * @Date:   2016-04-11 10:24:38
  * @Last Modified by:   Nate Bosscher
- * @Last Modified time: 2016-04-11 16:52:00
+ * @Last Modified time: 2016-04-12 11:46:19
  */
 
 require_once __DIR__ . "/class.mail-template-helper.php";

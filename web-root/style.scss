@@ -1,0 +1,240 @@
+/*
+* @Author: Nate Bosscher (c) 2015
+* @Date:   2016-04-11 11:22:10
+* @Last Modified by:   Nate Bosscher
+* @Last Modified time: 2016-04-12 10:52:34
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+
+$blue: #343A55;
+$yellow: #dabd38;
+
+$button-background: #3F90DC;
+$button-border: #4C87CA;
+
+$button-background-hover: #2B68B3;
+
+$light-gray: #E0E0E0;
+
+body{
+	font-family: 'Roboto', sans-serif;
+	margin:0;
+	height: 100%;
+}
+
+header{
+	background-color: $blue;
+	padding: 10px;
+	color: $yellow;
+
+	h1{
+		font-weight: normal;
+		margin: 0;
+		font-size: 20px;
+	}
+}
+
+footer{
+	position: absolute;
+	bottom:0;
+	color: $blue;
+	font-size: 12px;
+	padding: 10px;
+}
+
+main{
+	width: 600px;
+	display: block; 
+	margin: 0 auto;
+}
+
+input[type='button'], input[type='submit']{
+    background-color: $button-background;
+    border: 1px solid $button-border;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+	padding: 5px 10px;
+	font-size: 13px;
+
+    &:hover{
+    	background-color: $button-background-hover;
+    }
+}
+
+#start{
+	text-align: center;
+
+	input[type='button'], input[type='submit']{
+	    display: inline-block;
+	    padding: 10px;
+	    font-size: 14px;
+	    margin-top: 40%;
+	}
+}
+
+h2{
+	padding:0;
+	margin: 0;
+}
+
+#form{
+	display:none;
+	margin-top: 50px;
+}
+
+#form-header{
+	display:block;
+	padding: 10px;
+	text-align: right;
+}
+
+#form-list{
+	border-top: 1px solid $light-gray;
+	border-bottom: 1px solid $light-gray;
+	padding: 20px;
+}
+
+#list-no-items{
+    font-size: 13px;
+    font-style: italic;
+}
+
+#form-personal-info{
+	padding: 20px;
+}
+
+.list-item{
+	width: 500px;
+    padding: 4px 0;
+
+    & > *{
+		display: inline-block;
+		vertical-align: top;
+	}
+}
+
+.msg-box{
+	display:block;
+	width: 400px;
+	margin: 0 auto;
+	margin-top: 20%;
+
+	padding: 20px;
+	border-top: 1px solid $light-gray;
+
+	input[type="button"], 
+	input[type="submit"] {
+		min-width: 50px;
+		padding: 5px 10px;
+		font-size: 13px;
+	}
+
+	p{
+		font-size: 14px;
+	}
+}
+
+.description{
+	width: 300px;
+	overflow: hidden;
+}
+
+.amount{
+	width: 100px;
+}
+
+#list-template{
+	display:none;
+}
+
+#item-form{
+	display:none;
+	margin-top: 30px;
+
+	ul{
+		list-style: none;
+		padding: 0 20px;
+		padding-bottom: 20px;
+		margin:0;
+	}
+}
+
+#item-form li{
+	padding-top:10px;
+	padding-bottom: 5px;
+}
+
+label{
+	display:block;
+	font-weight: bold;
+	font-size: 13px;
+	padding-bottom:5px;
+}
+
+#item-form ul input, #item-form ul textarea{
+	margin:0;
+	margin-left: 10px;
+}
+
+textarea, input[type='text'], input[type='number']{
+	border: 1px solid hsl(0,0%,70%);
+	padding: 5px;
+}
+
+.remove-item, 
+#receipt-photos input[type='button'],
+#add-upload-item{
+	font-size: 10px;
+}
+
+#item-form ul textarea{
+	width: 200px;
+	height: 30px;
+	resize:none;
+}
+
+#item-receipt{
+	display:none;
+}
+
+#receipt-photos{
+	list-style:none;
+	width: 300px;
+
+	li{
+		padding: 5px;
+		background-color: #A4BAD6;
+		font-size: 12px;
+	    overflow: hidden;
+
+	    & > div{
+    	    width: 222px;
+	    }
+
+		& > *{
+			display:inline-block;
+			vertical-align: middle;
+		}
+	}
+}
+
+#cancel-add-form-item{
+	background-color: white;
+	color: black;
+}
+
+.validation-error{
+	display:none;
+	padding: 10px;
+	margin: 10px;
+	border-radius: 5px;
+	background-color:#FD9093;
+	border:1px solid #C96369;
+	/*color: white;*/
+}
+
+#submit-error, #submit-success, #submit-processing{
+	display:none;
+}

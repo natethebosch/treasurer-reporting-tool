@@ -5,7 +5,8 @@ Treasurer Reporting Tool
 Setup:
 --------
 
-* Edit config.php with the appropriate smtp email information and url root.
+* Install database schema (see src/db-schema/install.sql). You may manually change the database name from the default 'treasurer-tool'
+* Edit config.php with the appropriate smtp email information, url root and database information.
 * Update data/info.json with appropriate contact email addresses.
 
 ### Apache

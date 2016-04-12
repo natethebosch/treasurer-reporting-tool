@@ -3,7 +3,7 @@
  * @Author: Nate Bosscher (c) 2015
  * @Date:   2016-04-11 09:27:18
  * @Last Modified by:   Nate Bosscher
- * @Last Modified time: 2016-04-11 17:26:17
+ * @Last Modified time: 2016-04-12 12:42:31
  */
 
 /**
@@ -35,7 +35,8 @@ class Mail{
 		include __dir__ . "/mail-tmpl/treasurer-locked.php";
 
 		$mail = new PHPMailer;
-		$mail->setAddress(Config::getTreasurerEmail());
+		self::setMailerParams($mail);
+		$mail->addAddress(Config::getTreasurerEmail());
 		
 		$mail->isHTML(true);
 

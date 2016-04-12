@@ -2,101 +2,179 @@
 * @Author: Nate Bosscher (c) 2015
 * @Date:   2016-04-11 11:22:10
 * @Last Modified by:   Nate Bosscher
-* @Last Modified time: 2016-04-11 15:21:39
+* @Last Modified time: 2016-04-12 10:52:34
 */
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  height: 100%; }
 
-#form{
-	display:none;
-}
+header {
+  background-color: #343A55;
+  padding: 10px;
+  color: #dabd38; }
+  header h1 {
+    font-weight: normal;
+    margin: 0;
+    font-size: 20px; }
 
-.list-item{
-	width: 500px;
-}
+footer {
+  position: absolute;
+  bottom: 0;
+  color: #343A55;
+  font-size: 12px;
+  padding: 10px; }
 
-.list-item > *{
-	display: inline-block;
-	vertical-align: top;
-}
+main {
+  width: 600px;
+  display: block;
+  margin: 0 auto; }
 
-.description{
-	width: 300px;
-	overflow: hidden;
-}
+input[type='button'], input[type='submit'] {
+  background-color: #3F90DC;
+  border: 1px solid #4C87CA;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 13px; }
+  input[type='button']:hover, input[type='submit']:hover {
+    background-color: #2B68B3; }
 
-.amount{
-	width: 100px;
-}
+#start {
+  text-align: center; }
+  #start input[type='button'], #start input[type='submit'] {
+    display: inline-block;
+    padding: 10px;
+    font-size: 14px;
+    margin-top: 40%; }
 
-#list-template{
-	display:none;
-}
+h2 {
+  padding: 0;
+  margin: 0; }
 
-#item-form{
-	display:none;
-}
+#form {
+  display: none;
+  margin-top: 50px; }
 
-#item-form ul{
-	list-style: none;
-	padding: 20px;
-}
+#form-header {
+  display: block;
+  padding: 10px;
+  text-align: right; }
 
-#item-form li{
-	padding-top:10px;
-	padding-bottom: 5px;
-}
+#form-list {
+  border-top: 1px solid #E0E0E0;
+  border-bottom: 1px solid #E0E0E0;
+  padding: 20px; }
 
-label{
-	display:block;
-	font-weight: bold;
-	font-size: 13px;
-	padding-bottom:5px;
-}
+#list-no-items {
+  font-size: 13px;
+  font-style: italic; }
 
-#item-form ul input, #item-form ul textarea{
-	margin:0;
-	margin-left: 10px;
-}
+#form-personal-info {
+  padding: 20px; }
 
-textarea, input[type='text'], input[type='number']{
-	border: 1px solid hsl(0,0%,70%);
-	padding: 5px;
-}
+.list-item {
+  width: 500px;
+  padding: 4px 0; }
+  .list-item > * {
+    display: inline-block;
+    vertical-align: top; }
 
-#item-form ul textarea{
-	width: 200px;
-	height: 30px;
-	resize:none;
-}
+.msg-box {
+  display: block;
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 20%;
+  padding: 20px;
+  border-top: 1px solid #E0E0E0; }
+  .msg-box input[type="button"],
+  .msg-box input[type="submit"] {
+    min-width: 50px;
+    padding: 5px 10px;
+    font-size: 13px; }
+  .msg-box p {
+    font-size: 14px; }
 
-#item-receipt{
-	display:none;
-}
+.description {
+  width: 300px;
+  overflow: hidden; }
 
-#receipt-photos{
-	list-style:none;
-	width: 300px;
-}
+.amount {
+  width: 100px; }
 
-#receipt-photos li{
-	padding: 5px;
-	background-color: #A4BAD6;
-}
+#list-template {
+  display: none; }
 
-#receipt-photos li > *{
-	display:inline-block;
-	vertical-align: top;
-}
+#item-form {
+  display: none;
+  margin-top: 30px; }
+  #item-form ul {
+    list-style: none;
+    padding: 0 20px;
+    padding-bottom: 20px;
+    margin: 0; }
 
-#receipt-photos li > input{
-	float:right;
-}
+#item-form li {
+  padding-top: 10px;
+  padding-bottom: 5px; }
 
-.validation-error{
-	display:none;
-	padding: 10px;
-	margin: 10px;
-	border-radius: 5px;
-	background-color:#FD9093;
-	border:1px solid #C96369;
-	/*color: white;*/
-}
+label {
+  display: block;
+  font-weight: bold;
+  font-size: 13px;
+  padding-bottom: 5px; }
+
+#item-form ul input, #item-form ul textarea {
+  margin: 0;
+  margin-left: 10px; }
+
+textarea, input[type='text'], input[type='number'] {
+  border: 1px solid #b3b3b3;
+  padding: 5px; }
+
+.remove-item,
+#receipt-photos input[type='button'],
+#add-upload-item {
+  font-size: 10px; }
+
+#item-form ul textarea {
+  width: 200px;
+  height: 30px;
+  resize: none; }
+
+#item-receipt {
+  display: none; }
+
+#receipt-photos {
+  list-style: none;
+  width: 300px; }
+  #receipt-photos li {
+    padding: 5px;
+    background-color: #A4BAD6;
+    font-size: 12px;
+    overflow: hidden; }
+    #receipt-photos li > div {
+      width: 222px; }
+    #receipt-photos li > * {
+      display: inline-block;
+      vertical-align: middle; }
+
+#cancel-add-form-item {
+  background-color: white;
+  color: black; }
+
+.validation-error {
+  display: none;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #FD9093;
+  border: 1px solid #C96369;
+  /*color: white;*/ }
+
+#submit-error, #submit-success, #submit-processing {
+  display: none; }
+
+/*# sourceMappingURL=style.css.map */

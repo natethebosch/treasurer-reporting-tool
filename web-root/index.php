@@ -3,7 +3,7 @@
  * @Author: Nate Bosscher (c) 2015
  * @Date:   2016-04-11 10:31:33
  * @Last Modified by:   Nate Bosscher
- * @Last Modified time: 2016-04-11 17:35:03
+ * @Last Modified time: 2016-04-12 12:39:18
  */
 
 require_once __DIR__ . "/../config.php";
@@ -23,6 +23,7 @@ if(count($_GET) != 0){
 
 		switch($intent->type){
 			case MailLinkType::TRES_DL_ALL:
+
 				if(array_key_exists("year", $_POST)){
 
 					// generate .zip of files
@@ -40,7 +41,7 @@ if(count($_GET) != 0){
 
 				    @unlink($tmpFilePath);
 
-				    exit;
+				    die();
 				}else{
 
 					// ask for a year to download
@@ -80,15 +81,42 @@ if(count($_GET) != 0){
 				break;
 		}
 	}catch(Exception $e){
-		print_r($e);
-
+		// print_r($e);
 		if($e->getCode() == Exceptions::INVALID_MAIL_LINK){
 			include_once __DIR__ . "/invalid-mail-link.php";
 		}else if($e->getCode() == Exceptions::AUTH_CODE_NOT_FOUND){
 			include_once __DIR__ . "/invalid-auth-code.php";
 		}else if($e->getCode() == Exceptions::AUTH_ADMIN_FAILED){
+
+			if(array_key_exists("regenerate-admin-auth", $_POST)){
+
+				$success = true;
+				try{
+					Mail::emailTreasurerAccessLink();
+				}catch(Exception $e){
+					$success = false;
+				}
+
+				include_once __DIR__ . "/auth-admin-regenerated.php";
+				die();
+			}
+
 			include_once __DIR__ . "/auth-admin-failed.php";
 		}else if($e->getCode() == Exceptions::AUTH_ADMIN_OUTDATED){
+
+			if(array_key_exists("action", $_POST) && $_POST['action'] == "regenerate-admin-auth"){
+
+				$success = true;
+				try{
+					Mail::emailTreasurerAccessLink();
+				}catch(Exception $e){
+					$success = false;
+				}
+
+				include_once __DIR__ . "/auth-admin-regenerated.php";
+				die();
+			}
+
 			include_once __DIR__ . "/auth-admin-outdated.php";
 		}else{
 			echo $e->getTraceAsString();

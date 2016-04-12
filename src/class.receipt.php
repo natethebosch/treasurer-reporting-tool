@@ -3,7 +3,7 @@
  * @Author: Nate Bosscher (c) 2015
  * @Date:   2016-04-11 09:12:49
  * @Last Modified by:   Nate Bosscher
- * @Last Modified time: 2016-04-11 17:45:51
+ * @Last Modified time: 2016-04-12 12:28:33
  */
 
 
@@ -14,6 +14,8 @@ class Receipt{
 	const STATUS_UNDEF = -1;
 	const STATUS_CONFIRMED = 1;
 	const STATUS_DENIED = 0;
+
+	const DATE_FORMAT = "Y-m-d";
 
 	public $id;
 	public $submitter;
@@ -99,11 +101,14 @@ class Receipt{
 			}
 		}
 	
-
 		$ct = 0;
 		foreach($files as $k => $v){
 			$ext = pathinfo($_POST[$k . "-type"], PATHINFO_EXTENSION);
-			move_uploaded_file($v['tmp_name'], DATA_DIR  . $folder . "$ct." . $ext);
+
+			// move tmp_file to correct location
+			if(!move_uploaded_file($v['tmp_name'], DATA_DIR  . $folder . "$ct." . $ext)){
+				die("Couldn't move " . $v['tmp_name'] . " to " . DATA_DIR  . $folder . "$ct." . $ext);
+			}
 
 			// convert encodeing from base64
 			$fname = DATA_DIR  . $folder . "$ct." . $ext;
@@ -151,8 +156,8 @@ class Receipt{
 		try{
 			// update db record
 			$stmt = $db->prepare("UPDATE `receipts` SET status=?, reviewedBy=?, reviewedDate=NOW(), reviewedUsingCode=? WHERE id=?");
-			$status = self::STATUS_CONFIRMED;
-			$stmt->bind_param("issi", $status, $reviewer, $code, $this->id);
+			$this->status = self::STATUS_CONFIRMED;
+			$stmt->bind_param("issi", $this->status, $reviewer, $code, $this->id);
 			
 			$stmt->execute();
 
@@ -178,8 +183,8 @@ class Receipt{
 		try{
 			// update db record
 			$stmt = $db->prepare("UPDATE `receipts` SET status=?, reviewedBy=?, reviewedDate=NOW(), reviewedUsingCode=? WHERE id=?");
-			$status = self::STATUS_DENIED;
-			$stmt->bind_param("issi", $status, $reviewer, $code, $this->id);
+			$this->status = self::STATUS_DENIED;
+			$stmt->bind_param("issi", $this->status, $reviewer, $code, $this->id);
 			
 			$stmt->execute();
 
@@ -213,8 +218,64 @@ class Receipt{
 	 * @return [type] [description]
 	 */
 	static function getFormCSVAsString($receipts){
-		// todo
-		return "1,2,3";
+		$header = "Ambassadors Christian School,,,,Name:,NAME,,
+Expense Reimbursement Form,,,,Date:,DATE,,
+,,,,,,,
+Date of Purchase,Description,Committee,Budget Line Item,Approved By,Approved Date,Amount,GST,PST,NET";
+
+		$footer = ",,,,,,,
+,,,,,,,
+,,,,,Totals,SUM_AMOUNT,,,
+,,,,,Paid By:,,
+,,,,,Chq #:,,
+,,,,,Date:,,
+* Date formats as Y-m-d";
+
+		$sum = 0;
+
+		$rows = array();
+		foreach($receipts as $k => $v){
+
+			// build row
+			$row = array();
+			$row[] = $v->dateOfPurchase->format(Receipt::DATE_FORMAT);
+			$row[] = $v->description;
+			$row[] = $v->committee;
+			$row[] = $v->budgetLineItem;
+			$row[] = $v->reviewedBy;
+			$row[] = $v->reviewedDate->format(Receipt::DATE_FORMAT);
+			$row[] = $v->amount;
+
+			// add trailing 3 empty fields
+			$row[] = "";
+			$row[] = "";
+			$row[] = "";
+
+			// escape any special characters
+			foreach($row as $rk => $rv){
+				if(preg_match("/[\"\n,]+/", $rv)){
+					$row[$rk] = '"'.str_replace('"', '""', $rv) . '"';
+				}
+			}
+
+			// form csv
+			$rows[] = implode(",", $row);
+
+			// accumulator for SUM
+			$sum += $v->amount;
+		}
+
+		// format main csv section
+		$main = implode("\n", $rows);
+
+		// insert placeholder values
+		$footer = str_replace("SUM_AMOUNT", $sum, $footer);
+
+		reset($receipts);
+		$header = str_replace("NAME", current($receipts)->submitter, $header);
+		$header = str_replace("DATE", current($receipts)->dateOfSubmission->format(Receipt::DATE_FORMAT), $header);
+
+		return $header . "\n" . $main . "\n" . $footer;
 	}
 
 	/**
@@ -244,7 +305,7 @@ class Receipt{
 	static function getReceiptsForYear($year){
 		global $db;
 
-		$r = $db->query("SELECT * FROM `receipts` WHERE YEAR(dateOfSubmission)=" . intval($year));
+		$r = $db->query("SELECT * FROM `receipts` WHERE YEAR(dateOfSubmission)=" . intval($year) . " AND status=" . Receipt::STATUS_CONFIRMED);
 		
 		if($db->error){
 			die("db-error " . $db->error);
@@ -267,13 +328,14 @@ class Receipt{
 	 * @return [type]       [description]
 	 */
 	static function generateZipOfReceiptsForYear($year){
+
 		// get all the receipts for the year
 		$list = self::getReceiptsForYear($year);
 
 		// arrange into y-m-d => submitter => array(receipts)
 		$ymdList = array();
 		foreach($list as $v){
-			$date = $v->dateOfSubmission->format("Y-m-d");
+			$date = $v->dateOfSubmission->format(Receipt::DATE_FORMAT);
 			if(!array_key_exists($date, $ymdList))
 				$ymdList[$date] = array();
 
@@ -282,6 +344,7 @@ class Receipt{
 
 			$ymdList[$date][$v->submitter][] = $v;
 		}
+
 
 		$fname = tempnam("/tmp", "tres-rep-");
 
