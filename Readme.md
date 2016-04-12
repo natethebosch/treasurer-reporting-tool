@@ -4,7 +4,7 @@ Treasurer Reporting Tool
 
 Quick Start:
 -------------
-Follow the instructions in [setup](./#setup).
+Follow the instructions in [setup](#setup).
 
 System Properties:
 ------------------
