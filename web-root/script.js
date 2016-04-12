@@ -2,7 +2,7 @@
 * @Author: Nate Bosscher (c) 2015
 * @Date:   2016-04-11 12:51:15
 * @Last Modified by:   Nate Bosscher
-* @Last Modified time: 2016-04-12 13:16:11
+* @Last Modified time: 2016-04-12 14:34:50
 */
 
 
@@ -248,7 +248,9 @@ $(document).ready(function(){
 		}
 
 		uploadTotalLength = list.length;
+		$("#form").css("display", "none");
 		$("#submit-processing").css("display", "block");
+		
 		submitItem();
 	});
 

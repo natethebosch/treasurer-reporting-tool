@@ -3,7 +3,7 @@
  * @Author: Nate Bosscher (c) 2015
  * @Date:   2016-04-11 08:44:43
  * @Last Modified by:   Nate Bosscher
- * @Last Modified time: 2016-04-12 14:09:48
+ * @Last Modified time: 2016-04-12 14:49:43
  */
 
 date_default_timezone_set("America/Toronto");
@@ -25,4 +25,4 @@ define("INFO", __DIR__ . "/data/info.json");
 define("DATA_DIR", __DIR__ . "/data");
 
 define("ENCRYPTION_METHOD", "AES-256-CBC");
-define("SECRETE", "<random-password-at-least-64-chars-long>");
+define("SECRETE", "JkaAdtfyAAftZdNu8735HJfcllyLrx");

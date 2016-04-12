@@ -1,13 +1,13 @@
 {
   "committees": {
-    "Treasurer": "<email>",
-    "Property": "<email>",
-    "Fundraising": "<email>",
-    "Library": "<email>",
-    "Administration": "<email>",
-    "Finance": "<email>",
-    "Staffing": "<email>",
-    "Principle": "<email>"
+    "Treasurer": "<email-address>",
+    "Property": "<email-address>",
+    "Fund-raising": "<email-address>",
+    "Library": "<email-address>",
+    "Administration": "<email-address>",
+    "Finance": "<email-address>",
+    "Staffing": "<email-address>",
+    "Principle": "<email-address>"
   },
   "budgetLineItems": [
     "Admin",
@@ -16,7 +16,7 @@
     "Library",
     "Repairs and Maintenance",
     "School Supplies",
-    "Sports Equipement and Supplies",
+    "Sports Equipment and Supplies",
     "Art Supplies"
   ]
 }

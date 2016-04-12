@@ -3,7 +3,7 @@
  * @Author: Nate Bosscher (c) 2015
  * @Date:   2016-04-11 10:32:13
  * @Last Modified by:   Nate Bosscher
- * @Last Modified time: 2016-04-11 10:45:54
+ * @Last Modified time: 2016-04-12 14:46:13
  */
 
 class MailTemplateHelper{
@@ -18,26 +18,28 @@ class MailTemplateHelper{
 
 		if($receipt->status != Receipt::STATUS_UNDEF){
 			if($receipt->status == Receipt::STATUS_CONFIRMED)
-				$output .= "<tr><th>" . "[CONFIRMED]" . "</th></tr>";
+				$output .= "<tr><th style=\"text-align:left;\">" . "[CONFIRMED]" . "</th></tr>";
 			else if($receipt->status == Receipt::STATUS_DENIED)
-				$output .= "<tr><th>" . "[DENIED]" . "</th></tr>";
+				$output .= "<tr><th style=\"text-align:left;\">" . "[DENIED]" . "</th></tr>";
 		}
 
-		$output .= "<tr><th>" . "Amount" . "</th><td> " . $receipt->amount . "</td></tr>";
-		$output .= "<tr><th>" . "Committee Line" . "</th><td> " . $receipt->committee . " : " . $receipt->budgetLineItem . "</td></tr>";
-		$output .= "<tr><th>" . "Submitted by" . "</th><td> " . $receipt->submitter . "</td></tr>";
-		$output .= "<tr><th>" . "Purchased on" . "</th><td> " . $receipt->dateOfPurchase->format("Y-m-d") . "</td></tr>";
+		$output .= "<tr><th style=\"text-align:left;\">" . "Amount" . "</th><td> " . $receipt->amount . "</td></tr>";
+		$output .= "<tr><th style=\"text-align:left;\">" . "Committee Line" . "</th><td> " . $receipt->committee . " : " . $receipt->budgetLineItem . "</td></tr>";
+		$output .= "<tr><th style=\"text-align:left;\">" . "Submitted by" . "</th><td> " . $receipt->submitter . "</td></tr>";
+		$output .= "<tr><th style=\"text-align:left;\">" . "Purchased on" . "</th><td> " . $receipt->dateOfPurchase->format("Y-m-d") . "</td></tr>";
 
 		if($receipt->reviewedBy){
-			$output .= "<tr><th>" . "Reviewed by" . "</th><td> " . $receipt->reviewedBy . "</td></tr>";
-			$output .= "<tr><th>" . "Reviewed on" . "</th><td> " . $receipt->reviewedDate->format("Y-m-d H:i:s") . "</td></tr>";
-			$output .= "<tr><th>" . "Reviewed auth" . "</th><td> " . $receipt->reviewedUsingCode . "</td></tr>";
+			$output .= "<tr><th style=\"text-align:left;\">" . "Reviewed by" . "</th><td> " . $receipt->reviewedBy . "</td></tr>";
+			$output .= "<tr><th style=\"text-align:left;\">" . "Reviewed on" . "</th><td> " . $receipt->reviewedDate->format("Y-m-d H:i:s") . "</td></tr>";
+			$output .= "<tr><th style=\"text-align:left;\">" . "Reviewed auth" . "</th><td> " . $receipt->reviewedUsingCode . "</td></tr>";
 		}
 
 
-		$output .= "<tr><th>" . "Description" . "</th></tr><tr><td colspan=\"2\">" . $receipt->description . "</td></tr>";
+		$output .= "<tr><th style=\"text-align:left;\">" . "Description" . "</th></tr><tr><td colspan=\"2\">" . $receipt->description . "</td></tr>";
 
 		$output .= "</tbody></table>"; // ending padding
+
+		return $output;
 	}
 
 	/**
@@ -71,5 +73,7 @@ class MailTemplateHelper{
 		$output .= "Description: " . $receipt->description . "\n";
 
 		$output .= "\n"; // ending padding
+
+		return $output;
 	}
 }
