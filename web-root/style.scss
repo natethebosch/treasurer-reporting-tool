@@ -18,12 +18,15 @@ $button-background-hover: #2B68B3;
 $light-gray: #E0E0E0;
 
 body{
+	display: block;
 	font-family: 'Roboto', sans-serif;
 	margin:0;
 	height: 100%;
+	width:100%;
 }
 
 header{
+	display:block;
 	background-color: $blue;
 	padding: 10px;
 	color: $yellow;
@@ -36,17 +39,33 @@ header{
 }
 
 footer{
-	position: absolute;
-	bottom:0;
+	// position: absolute;
+	// bottom:0;
 	color: $blue;
 	font-size: 12px;
 	padding: 10px;
 }
 
 main{
+	position: relative;
+	display: block;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
 	width: 600px;
-	display: block; 
+
 	margin: 0 auto;
+
+	margin-top: -44px;
+	margin-bottom: -44px;
+
+	.push-top{
+		height: 44px;
+	}
+
+	.push-bottom{
+		height: 44px;
+	}
 }
 
 input[type='button'], input[type='submit']{
@@ -237,4 +256,15 @@ textarea, input[type='text'], input[type='number']{
 
 #submit-error, #submit-success, #submit-processing{
 	display:none;
+}
+
+@media only screen and (max-width: 500px) {
+	main{
+		width: 100%;
+	}
+
+	.msg-box{
+		width:100%;
+		box-sizing: border-box;
+	}
 }

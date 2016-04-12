@@ -6,11 +6,14 @@
 */
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
 body {
+  display: block;
   font-family: 'Roboto', sans-serif;
   margin: 0;
-  height: 100%; }
+  height: 100%;
+  width: 100%; }
 
 header {
+  display: block;
   background-color: #343A55;
   padding: 10px;
   color: #dabd38; }
@@ -20,16 +23,24 @@ header {
     font-size: 20px; }
 
 footer {
-  position: absolute;
-  bottom: 0;
   color: #343A55;
   font-size: 12px;
   padding: 10px; }
 
 main {
-  width: 600px;
+  position: relative;
   display: block;
-  margin: 0 auto; }
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  width: 600px;
+  margin: 0 auto;
+  margin-top: -44px;
+  margin-bottom: -44px; }
+  main .push-top {
+    height: 44px; }
+  main .push-bottom {
+    height: 44px; }
 
 input[type='button'], input[type='submit'] {
   background-color: #3F90DC;
@@ -176,5 +187,13 @@ textarea, input[type='text'], input[type='number'] {
 
 #submit-error, #submit-success, #submit-processing {
   display: none; }
+
+@media only screen and (max-width: 500px) {
+  main {
+    width: 100%; }
+
+  .msg-box {
+    width: 100%;
+    box-sizing: border-box; } }
 
 /*# sourceMappingURL=style.css.map */
