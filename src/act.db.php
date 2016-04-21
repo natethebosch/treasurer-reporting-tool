@@ -8,11 +8,12 @@
 try{
 	$db = mysqli_connect(DB_SERVER, DB_USER, DB_PWD, DB_DBNAME);
 }catch(Exception $e){
-	include_once __DIR__ . "/../install.php";
+    include_once __DIR__ . "/../install.php";
+    echo "Database Error - " . $e->getMessage();
 	die();
 }
 
 if($db->error){
 	include_once __DIR__ . "/../install.php";
-	die("Database Error");
+	die("Database Error - ".$db->error);
 }

@@ -55,10 +55,11 @@ Setup:
 * Install database schema (see src/db-schema/install.sql). You may manually change the database name from the default 'treasurer-tool'
 * Edit config.php with the appropriate SMTP email information, URL root, encryption and database information.
 * Update data/info.json with appropriate contact email addresses.
+* If you see a page titled INSTALL, you still have some info to configure
 
 ### Apache
 
-* No additional setup reqr'd.
+* If you are placing this tool in a subdirectory ensure that you update .htaccess to have the prefix of the subdir.
 
 ### NGINX
 
